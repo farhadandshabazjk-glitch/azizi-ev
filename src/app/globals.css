@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f4efe4;
+  --color-paper-2: #ede5d6;
+  --color-paper-3: #e4d9c4;
+  --color-ink: #15140f;
+  --color-ink-soft: #3a362c;
+  --color-green: #0e4a3c;
+  --color-green-light: #14614f;
+  --color-green-dark: #08302a;
+  --color-stone: #6b6455;
+  --color-rule: #c9bfa9;
+  --color-marigold: #e9912b;
+  --color-marigold-ink: #a85f11;
+
+  --font-display: "Bricolage Grotesque", "Georgia", serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum" 0;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-marigold);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font-family: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-marigold-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* --- typographic details --- */
+.micro {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- the enamel signboard plate --- */
+.plate {
+  border: 3px solid var(--color-green-dark);
+  box-shadow: 6px 6px 0 rgba(14, 74, 60, 0.18);
+}
+
+.plate-marigold {
+  border: 3px solid var(--color-marigold-ink);
+  box-shadow: 6px 6px 0 rgba(168, 95, 17, 0.18);
+}
+
+/* --- register paper --- */
+.ledger-paper {
+  background-color: var(--color-paper);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(201, 191, 169, 0.28) 1px,
+    transparent 1px
+  );
+  background-size: 100% 2.25rem;
+}
+
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* --- form controls --- */
+.field {
+  width: 100%;
+  background: #fffdf8;
+  border: 1px solid var(--color-rule);
+  border-bottom: 2px solid var(--color-green);
+  padding: 0.75rem 0.9rem;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+.field:hover {
+  border-color: var(--color-green-light);
+}
+.field:focus {
+  outline: none;
+  border-color: var(--color-marigold-ink);
+  background: #fff;
+}
+.field::placeholder {
+  color: #9a917d;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 2px solid var(--color-green-dark);
+  transition: transform 140ms ease, background-color 140ms ease, color 140ms ease,
+    box-shadow 140ms ease;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn-primary {
+  background: var(--color-green);
+  color: var(--color-paper);
+  box-shadow: 4px 4px 0 rgba(8, 48, 42, 0.35);
+}
+.btn-primary:hover {
+  background: var(--color-green-dark);
+  box-shadow: 2px 2px 0 rgba(8, 48, 42, 0.35);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--color-green-dark);
+}
+.btn-ghost:hover {
+  background: var(--color-green);
+  color: var(--color-paper);
+}
+.btn-marigold {
+  background: var(--color-marigold);
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+  box-shadow: 4px 4px 0 rgba(21, 20, 15, 0.25);
+}
+.btn-marigold:hover {
+  background: #f0a349;
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* --- status chips --- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.chip-in_stock {
+  background: var(--color-green);
+  color: var(--color-paper);
+  border-color: var(--color-green-dark);
+}
+.chip-low_stock {
+  background: var(--color-marigold);
+  color: var(--color-ink);
+  border-color: var(--color-marigold-ink);
+}
+.chip-coming_soon {
+  background: transparent;
+  color: var(--color-stone);
+  border-color: var(--color-stone);
+}
+
+.tick {
+  display: inline-block;
+  width: 4px;
+  height: 15px;
+  background: var(--color-green);
+}
+.tick-empty {
+  background: transparent;
+  border: 1px solid var(--color-rule);
+}
+
+.row-hover {
+  transition: background-color 180ms ease;
+}
+.row-hover:hover {
+  background-color: rgba(233, 145, 43, 0.09);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
